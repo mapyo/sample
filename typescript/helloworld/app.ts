@@ -1,24 +1,15 @@
-// Node.jsの型定義ファイルの読み込み
-/// <reference path="../node.d.ts"/>;
-import http = require("http");
+// 外部tsファイルserverModule.tsを読み込み、serverModuleという名前をつける。
+import serverModule = require("./serverModule");
 class Main
 {
     // コンストラクター
     constructor()
     {
-        // httpサーバーを設定
-        var server:http.Server = http.createServer((request, response) => this.requestHandler(request, response));
-        // var server:http.Server = http.createServer((request, response) => this.requestHandler(request, response));
-        // サーバを起動してリクエストを待ち受け状態にする
-        server.listen("5000");
+        // serverModuleの中のServerAPIクラスのインスタンスを作成
+        var serverAPI:serverModule.ServerAPI = new serverModule.ServerAPI();
+        // ServerAPIの関数を実行
+        serverAPI.initServer();
     }
-    /*
-     * サーバにリクエストがあった時に実行される関数
-     */
-     private requestHandler(request, response):void
-     {
-         response.end("Hello! Node.js with TypeScript");
-     }
 }
 
 // Mainクラスのインスタンス作成
