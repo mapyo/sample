@@ -1,0 +1,4 @@
+db:
+  host: 'development.jp'
+  user: 'development'
+
