@@ -1,0 +1,4 @@
+db:
+  host: 'production.jp'
+  user: 'production'
+
