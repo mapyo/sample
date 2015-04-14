@@ -1,5 +1,7 @@
 {
     "require": {
-        "illuminate/database": "~4.1"
+        "illuminate/database": "~4.1",
+        "hassankhan/config": "0.8.*",
+        "symfony/yaml": "~2.6"
     }
 }
