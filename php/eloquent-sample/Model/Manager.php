@@ -8,6 +8,7 @@ use Noodlehaus\Config;
 
 class Manager
 {
+    private static $eloquent = null;
 
     public static function getInstance()
     {
@@ -24,15 +25,14 @@ class Manager
 
     public function init()
     {
-        static $eloquent = null;
-        if (null !== $eloquent) {
+        if (null !== $this->eloquent) {
             return;
         }
 
         $conf = Config::load('./config/database.yml');
-        $eloquent = new Capsule;
+        $this->eloquent = new Capsule;
         // 更新の時はmaster, 参照の時はslaveに自動的に切り替わる
-        $eloquent->addConnection(array(
+        $this->eloquent->addConnection(array(
             'driver'    => 'mysql',
             'write' => array(
                 'host'  => $conf['master_host'],
@@ -47,19 +47,13 @@ class Manager
             'prefix'    => '',
             'charset'   => $conf['charset'],
         ));
-        $eloquent->setEventDispatcher(new Dispatcher(new Container));
-        $eloquent->setAsGlobal();
-        $eloquent->bootEloquent();
+        $this->eloquent->setEventDispatcher(new Dispatcher(new Container));
+        $this->eloquent->setAsGlobal();
+        $this->eloquent->bootEloquent();
     }
 
-    public function getConnection()
+    public function __call($method, $params)
     {
-        return $this->getInstance()->getConnection();
+        return call_user_func_array(array($this->eloquent, $method), $params);
     }
-
-    public function getQueryLog()
-    {
-        return $this->getConnection()->getQueryLog();
-    }
-
 }

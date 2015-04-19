@@ -10,5 +10,11 @@ $loader->add('Model\\', __DIR__);
 Eloquent::init();
 
 $user = User::find(1);
-
 var_dump($user->name);
+
+$results = Eloquent::getConnection()
+    ->select('select * from my_users');
+var_dump($results[0]['name']);
+
+$log = Eloquent::getConnection()->getQueryLog();
+var_dump($log);
