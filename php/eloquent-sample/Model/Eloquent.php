@@ -15,9 +15,4 @@ class Eloquent
     {
         return Manager::getInstance()->getConnection();
     }
-
-    static public function getQueryLog()
-    {
-        return Manager::getInstance()->getQueryLog();
-    }
 }
