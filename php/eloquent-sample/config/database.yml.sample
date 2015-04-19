@@ -1,0 +1,7 @@
+master_host: 'master_host'
+slave_host: 'slave_host'
+database: 'database'
+username: 'username'
+password: 'password'
+port: '3306'
+charset: 'utf8'
