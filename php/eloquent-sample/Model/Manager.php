@@ -29,6 +29,7 @@ class Manager
             return;
         }
 
+        // ./config/database.yml.sample をコピーしてよしなに修正して使う
         $conf = Config::load('./config/database.yml');
         $this->eloquent = new Capsule;
         // 更新の時はmaster, 参照の時はslaveに自動的に切り替わる
